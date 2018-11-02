@@ -1,0 +1,144 @@
+<h1>ToDo App</h1>
+<button (click)="toggle()" id="btt" class="w3-button w3-theme" >
+  {{addTask}}
+</button>
+<br><br>
+<ng-container *ngIf="showw">
+  <br>
+<form #ToDoForm="ngForm" (ngSubmit)="addToDo(toDoListt)">
+    <div class="form-group">
+
+      <label>Title</label>
+      <input class="form-control" type="text" [(ngModel)]="toDoListt.title" name="nom" #title="ngModel" required > <br><br>
+
+    </div>
+  <div [hidden]="title.valid" >the title is necessary</div>
+
+  <div class="form-group">
+        <label>Descritption</label>
+    <input type="text" #description="ngModel" [(ngModel)]="toDoListt.description" name="description" required> <br><br>
+  </div>
+  <div [hidden]="description.valid" >the description is necessary</div>
+
+
+  <div class="form-group">
+    <label>Due</label>
+    <input type="date" #due="ngModel" [(ngModel)]="toDoListt.due" name="due" required> <br><br>
+  </div>
+  <div [hidden]="due.valid" >Due is necessary</div>
+
+  <div class="form-group">
+    <label>Updated At</label>
+    <input type="date" #updated="ngModel" [(ngModel)]="toDoListt.updated" name="updated" required> <br><br>
+  </div>
+  <div [hidden]="updated.valid" >updatedAt is necessary</div>
+
+  <div class="form-group">
+    <label>createdAt</label>
+    <input type="date" #created="ngModel" [(ngModel)]="toDoListt.created" name="created" required> <br><br>
+  </div>
+  <div [hidden]="created.valid" >createdAt is necessary</div>
+  <form>
+    <div class="form-group">
+      <label>Completed</label>
+      <br>
+      <input type="radio" value="false"  class="w3-radio" #isCompleted="ngModel" [(ngModel)]="toDoListt.isCompleted" name="isCompleted" >False<br>
+      <input type="radio" value="true"  class="w3-radio" #isCompleted="ngModel" [(ngModel)]="toDoListt.isCompleted" name="isCompleted" >True<br><br>
+
+    </div>
+
+  </form>
+
+
+
+  <input type="submit" [disabled]="!ToDoForm.valid" class="w3-button w3-theme" Value="Add to my ToDo list">
+</form>
+</ng-container>
+
+<h3 style="text-align: center">
+  My ToDO list
+</h3>
+<div class="w3-responsive w3-card-4">
+  <table class="w3-table w3-striped w3-bordered">
+
+    <tr class="w3-theme">
+      <th>Title</th>
+      <th>Due</th>
+      <th>Description</th>
+      <th>Completed</th>
+      <th>Created At</th>
+      <th>Updated At</th>
+      <th>Delete</th>
+      <th>Update</th>
+
+    </tr>
+    <tr *ngFor="let Todo of todolist;let i=index" class="w3-white">
+      <td>{{Todo.title}}</td>
+      <td>{{Todo.due}}</td>
+      <td>{{Todo.description}}</td>
+      <td>{{Todo.isCompleted}}</td>
+      <td>{{Todo.created}}</td>
+      <td>{{Todo.updated}}</td>
+      <td><button (click)="deleteToDo(i)" class="w3-button w3-theme">X</button></td>
+      <td><button (click)="getToDO(i)" class="w3-button w3-theme">{{update}}</button></td>
+    </tr>
+
+  </table>
+</div>
+<br>
+<ng-container *ngIf="show">
+<div>
+  <br>
+
+  <h3 style="text-align: center">
+    Update a task
+  </h3>
+<form #ToDoFormU="ngForm" (ngSubmit)="updateToDO(toDoListtt)">
+  <div class="form-group">
+
+
+    <input class="form-control" type="text" value="toDoListtt.title" [(ngModel)]="toDoListtt.title" name="nom" #title="ngModel"  hidden> <br><br>
+
+  </div>
+
+
+  <div class="form-group">
+    <label>Descritption</label>
+    <input type="text" #description="ngModel" value="toDoListtt.description"[(ngModel)]="toDoListtt.description" name="description" required> <br><br>
+  </div>
+
+
+
+  <div class="form-group">
+    <label>Due</label>
+    <input type="date" value="toDoListtt.due" #due="ngModel" [(ngModel)]="toDoListtt.due" name="due" required> <br><br>
+  </div>
+
+
+  <div class="form-group">
+    <label>Updated At</label>
+    <input type="date" value="toDoListtt.updated" #updated="ngModel" [(ngModel)]="toDoListtt.updated" name="updated" required> <br><br>
+  </div>
+
+
+  <div class="form-group">
+    <label>createdAt</label>
+    <input type="date" value="toDoListtt.created" #created="ngModel" [(ngModel)]="toDoListtt.created" name="created" required> <br><br>
+  </div>
+
+<form>
+  <div class="form-group">
+    <label>Completed</label>
+    <br>
+    <input type="radio" value="false" class="w3-radio" #isCompleted="ngModel" [(ngModel)]="toDoListtt.isCompleted" name="isCompleted" >False<br>
+    <input type="radio" value="true" class="w3-radio"  #isCompleted="ngModel" [(ngModel)]="toDoListtt.isCompleted" name="isCompleted" >True<br><br>
+
+  </div>
+
+</form>
+
+
+  <input type="submit"  Value="Update " class="w3-button w3-theme">
+</form>
+</div>
+</ng-container>
